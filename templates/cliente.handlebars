@@ -1,0 +1,61 @@
+<div  id='clienteView' class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
+					{{#if id}}
+						Modificar cliente
+						{{else}}
+						Nuevo cliente
+					{{/if}}
+				</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+			</div>
+			<div class="modal-body">
+				<form action="">
+					<!-- id -->
+					<input type="hidden" name='id' value={{id}}>
+					<!-- Nombres -->
+					<div class="form-group">
+						<label for="nombres">Nombres</label>
+						<input type="text" class="form-control" name='nombres' value="{{nombres}}">
+					</div>
+					<!-- Ciudad -->
+					<div class="form-group">
+						<label for="ciudad">Ciudad</label>
+						<input type="text" class="form-control" name='ciudad' value="{{ciudad}}">
+					</div>
+					<!-- Sexo -->
+					<div class="form-group">
+						<label for="">Sexo</label>
+						<div class="form-group">
+							<div class="form-check form-check-inline">
+								<input id='sexoMasculino' type="radio" class="form-check-input" name='sexo' value='M' {{{marcarRadiobutton 'M' sexo}}}>
+								<label for="sexoMasculino" class="form-check-label">Masculino</label>
+								&nbsp;
+								<input id='sexoFemenino' type="radio" class="form-check-input" name='sexo' value='F' {{{marcarRadiobutton 'F' sexo}}}>
+								<label for="sexoFemenino" class="form-check-label">Femenino</label>
+							</div>
+						</div>
+					</div>
+					<!-- Teléfono -->
+					<div class="form-group">
+						<label for="nombres">Teléfono</label>
+						<input type="text" class="form-control" name='telefono' value="{{telefono}}">
+					</div>
+					<!-- Fecha nacimiento -->
+					<div class="form-group">
+						<label for="nombres">Fecha nacimiento</label>
+						<input  id='inputFecha' type="text" class="form-control" name='fecha_nacimiento' value="{{fechaNacimiento}}">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<!-- Controles -->
+				<button id="btEnviar" class="btn btn-primary">Enviar</button>				
+			</div>
+		</div>
+	</div>
+</div>
