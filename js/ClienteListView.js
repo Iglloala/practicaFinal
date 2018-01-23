@@ -16,7 +16,15 @@ var ClienteListView = (function(){
 		}
 		// Ahora ya pues lo paso a handlebars para que cree el html
 		var html = Handlebars.templates.listaClientes(datos);
-		_bloqueContenido.append(html);
+		// Si no existe en el documento lo añade
+		if (!_bloqueContenido.find('#clienteListView').length){
+			_bloqueContenido.append(html);
+		}
+		// Y si ya existe lo reemplaza
+		else {
+			_bloqueContenido.find('#clienteListView').replaceWith(html);
+		}
+		
 	}
 
 	// Ejecución
