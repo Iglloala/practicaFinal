@@ -38,9 +38,11 @@ var ClienteList = (function(){
 	
 	// _cargarClientes: Método que ejecuta una petición AJAX a la API establece el listado de clientes inicial
 	var _cargarClientes = function(){
-		var jqxhr = $.ajax({url:_urlApi+"/consulta.php", async: false});
+		var jqxhr = $.ajax({url:_urlApi+"/consulta.php"});
 		jqxhr.done(function(respuesta){
 			_actualizarListado(respuesta);
+			// Publico la carga inicial de clientes
+			PubSub.publish('carga/inicial', {clientes: _listaClientes});
 		});
 	}
 
@@ -61,6 +63,7 @@ var ClienteList = (function(){
 		// 'alternativas' con el valor del sexo
 		datosCliente.submit = 'submit';
 		datosCliente.alternativas = datosCliente.sexo;
+		datosCliente.fecha_nacimiento = datosCliente.fechaNacimiento;
 		// Intenta insertarlo en la bbdd mediante petición ajax
 		var jqxhr = $.ajax({url:_urlApi+"nuevo.php", data:datosCliente, method:'POST'});
 		var that = this;
@@ -70,6 +73,8 @@ var ClienteList = (function(){
 			// insertado pues actualizo la 'listaClientes' machacando su valor anterior
 			// por el nuevo listado que devuelve nuevo.php
 			_actualizarListado(respuesta);
+			//Publico la inserción
+			PubSub.publish("cliente/insertado", {clientes:_listaClientes});
 		})
 		jqxhr.fail(function(){
 			console.log('No se ha podido insertar el cliente en la bbdd');
@@ -82,15 +87,29 @@ var ClienteList = (function(){
 		// Empiezo una peticion ajax (POR GET PARA PASAR EL ID)
 		var jqxhr = $.ajax({url:_urlApi+'eliminar.php', data:{id:idCliente}, method:'GET'});
 		jqxhr.done(function(respuesta){
-			console.log(respuesta);
 			// Si la 'respuesta' termina con 'correctamente' pues que notifique de la eliminacion
-			// Si no, pues que notifique de error
+			if (respuesta.indexOf('correctamente') != -1){
+				console.log('Cliente eliminado');
+				// Busca en el listado un cliente con el idCliente y lo elimina del array
+				var indice;
+				for (var i=0; i<_listaClientes.length; i++){
+					if (_listaClientes[i].id == idCliente){
+						indice = i;
+						break;
+					}
+				}
+				_listaClientes.splice(indice, 1);
+				//Publico la eliminación
+				PubSub.publish("cliente/eliminado", {clientes:_listaClientes});
+			}
+			// Si no, pues notifica de error
+			else {
+				console.log('Error al eliminar el cliente');
+			}		
 		});
 		jqxhr.fail(function(respuesta){
 			console.log('No se ha podido eliminar el cliente');
 		});
-		// Y ahora ya pues que vuelva a solicitar el listado y actualize
-		_cargarClientes();
 	}
 
 	// Función para modificar un cliente
@@ -116,11 +135,14 @@ var ClienteList = (function(){
 			console.log(respuesta);
 			// Si ha devuelto error informo
 			if (respuesta.indexOf('error') != -1){
-				console.log('ERROR: ' + respuesta );
+				console.log('Error al actualizar el cliente' );
 			}
-			// Si no ha devuelto error pues actualizaré la lista
+			// Si no ha devuelto error pues actualizo listaClientes
 			else {
-				console.log("EXITO: " + respuesta);
+				console.log("El cliente ha sido actualizado correctamente");
+				_actualizarListado(respuesta);
+				// Y publico la modificación
+				PubSub.publish("cliente/modificado", {clientes:_listaClientes});
 			}
 		});
 		// Si falla la peticion

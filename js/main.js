@@ -27,8 +27,7 @@ var CrudClientes = (function(){
 	if (comprobarDependencias()) {
 		// Inicializo los modulos
 		ClienteList.init(_conf.urlApi);
-		// Genero (y muestro) la lista de clientes
-		ClienteListView.generar(ClienteList.listaClientes);
+		
 	}
 	
 	// Objeto devuelto por el módulo
