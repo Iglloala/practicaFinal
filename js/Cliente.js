@@ -1,3 +1,4 @@
+// NO ESTOY USANDO ESTA CLASE!! //
 var Cliente = (function(id, nombres, ciudad, sexo, telefono, fecha_nacimiento){
 	// Defino las propiedades
 	this._id = id;

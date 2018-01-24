@@ -22,13 +22,18 @@ var CrudClientes = (function(){
 			return false;
 		}
 	}
-	// EJECUCIÓN
+	
+	// INICIALIZACION
 	// Compruebo que se hayan cargado el resto de módulos
 	if (comprobarDependencias()) {
-		// Inicializo los modulos
-		ClienteList.init(_conf.urlApi);
-		
+		// Inicializo los modulos que necesiten datos del controlador
+		ClienteList.init(_conf.urlApi);	
 	}
+	// Asocio los manejadores de eventos a los botones de la interfaz
+	$('#btNuevoCliente').on('click', ClienteView.mostrar);
+	
+	// EJECUCIÓN
+	
 	
 	// Objeto devuelto por el módulo
 	return {

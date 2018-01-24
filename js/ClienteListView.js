@@ -29,6 +29,10 @@ var ClienteListView = (function(){
 		else {
 			_bloqueContenido.find('#clienteListView').replaceWith(html);
 		}
+		// Y AÑADO LOS MANEJADORES DE EVENTOS
+		$('#btNuevoCliente').on('click', function(){
+			console.log('Se ha pulsado el botón para añadir un nuevo cliente');
+		})
 		
 	}
 

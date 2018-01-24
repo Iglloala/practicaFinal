@@ -39,7 +39,7 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
     + "</td>\r\n						<td>"
     + alias4(((helper = (helper = helpers.telefono || (depth0 != null ? depth0.telefono : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"telefono","hash":{},"data":data}) : helper)))
     + "</td>\r\n						<td>"
-    + alias4(((helper = (helper = helpers.fechaNacimiento || (depth0 != null ? depth0.fechaNacimiento : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fechaNacimiento","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.fecha_nacimiento || (depth0 != null ? depth0.fecha_nacimiento : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fecha_nacimiento","hash":{},"data":data}) : helper)))
     + "</td>\r\n						<td><i class='fas fa-edit'></i>&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>\r\n					</tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;

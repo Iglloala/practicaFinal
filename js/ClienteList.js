@@ -11,26 +11,33 @@ var ClienteList = (function(){
 		_cargarClientes();
 	}
 
-	// _crearCliente: Método factory que retorna un objeto Cliente
-	var _crearCliente = function(id, nombres, ciudad, sexo, telefono, fecha_nacimiento){
-		return {
-			id: id,
-			nombres: nombres,
-			ciudad: ciudad,
-			sexo: sexo,
-			telefono: telefono,
-			fecha_nacimiento: fecha_nacimiento
-		}
+	// _Cliente: Método factory que retorna un objeto Cliente
+	var _Cliente = function(id, nombres, ciudad, sexo, telefono, fecha_nacimiento){
+		this.id = id;
+		this.nombres = nombres;
+		this.ciudad = ciudad;
+		this.sexo = sexo;
+		this.telefono = telefono;
+		this.fecha_nacimiento = fecha_nacimiento;
 	}
 
 	// _actualizarListado: Recibe como parámetro la respuesta de la api, la convierte en un 
 	// array de objetos cliente y define o actualiza la propiedad listaClientes del módulo
 	var _actualizarListado = function(respuesta){
 		return function(){
-			var objetoClientes = JSON.parse(respuesta);
+			var respuestaJSON = JSON.parse(respuesta);
 			_listaClientes.length = 0; // vacío el array sin perder su referencia
-			for (indice in objetoClientes){
-				var cliente = objetoClientes[indice];
+			for (indice in respuestaJSON){
+				// Preparo los campos
+				var id = respuestaJSON[indice].id;
+				var nombres = respuestaJSON[indice].nombres;
+				var ciudad = respuestaJSON[indice].ciudad;
+				var sexo = respuestaJSON[indice].sexo;
+				var telefono = respuestaJSON[indice].telefono;
+				var fecha_nacimiento = respuestaJSON[indice].fechaNacimiento;
+				// Creo un objeto cliente
+				var cliente = new _Cliente(id, nombres, ciudad, sexo, telefono, fecha_nacimiento);
+				// Lo añado a _listaClientes
 				_listaClientes.push(cliente)
 			}
 		}(that); // Aquí hago un closure para tener disponible la referencia a _listaClientes
@@ -48,24 +55,25 @@ var ClienteList = (function(){
 
 	// Función para buscar el índice de un cliente mediante su id
 	var _buscarCliente = function(id){
-		for (cliente in this.listaClientes){
-			if (that.listaClientes[cliente].id == id){
-				return cliente;
+		var indiceCorrecto = -1;
+		for (var i=0; i<_listaClientes.length; i++){
+			if (_listaClientes[i].id == id){
+				indiceCorrecto = i;
+				break;
 			}
 		}
-		return false;
+		return indiceCorrecto;
 	}
 
 	// Función para insertar un nuevo cliente
-	var _insertarCliente = function(datosCliente) {
+	var _insertarCliente = function(cliente) {
 		console.log('Insertando cliente');
-		// Modifico el objeto datosCliente para que tenga una propiedad 'submit' y una propiedad
+		// Modifico el objeto cliente para que tenga una propiedad 'submit' y una propiedad
 		// 'alternativas' con el valor del sexo
-		datosCliente.submit = 'submit';
-		datosCliente.alternativas = datosCliente.sexo;
-		datosCliente.fecha_nacimiento = datosCliente.fechaNacimiento;
+		cliente.submit = 'submit';
+		cliente.alternativas = cliente.sexo;
 		// Intenta insertarlo en la bbdd mediante petición ajax
-		var jqxhr = $.ajax({url:_urlApi+"nuevo.php", data:datosCliente, method:'POST'});
+		var jqxhr = $.ajax({url:_urlApi+"nuevo.php", data:cliente, method:'POST'});
 		var that = this;
 		jqxhr.done(function(respuesta){
 			console.log('Cliente insertado en la bbdd:\n'+respuesta);
@@ -113,18 +121,18 @@ var ClienteList = (function(){
 	}
 
 	// Función para modificar un cliente
-	var _modificarCliente = function(datosCliente){
-		console.log('Modificando cliente con id:' + datosCliente.id);
+	var _modificarCliente = function(cliente){
+		console.log('Modificando cliente con id:' + cliente.id);
 		// Ahora construyo los datos de la petición:
 		// <Los de un cliente> + submit + sexo=alternativas + fechaNacimiento=fecha_nacimiento
 		var data = {
 			submit:'submit',
-			cliente_id: datosCliente.id,
-			nombres: datosCliente.nombres,
-			ciudad: datosCliente.ciudad,
-			alternativas: datosCliente.sexo,
-			telefono: datosCliente.telefono,
-			fecha_nacimiento: datosCliente.fechaNacimiento,
+			cliente_id: cliente.id,
+			nombres: cliente.nombres,
+			ciudad: cliente.ciudad,
+			alternativas: cliente.sexo,
+			telefono: cliente.telefono,
+			fecha_nacimiento: cliente.fecha_nacimiento,
 		}
 		// Y ejecuto la petición por post
 		var jqxhr = $.ajax({url:_urlApi+'actualizar.php', data:data, method:'POST'});
@@ -157,8 +165,8 @@ var ClienteList = (function(){
 		init: _init,
 		//cargarClientes : _cargarClientes, // igual sobra
 		insertarCliente: _insertarCliente,
-		//buscarCliente: _buscarCliente, // igual sobra
-		crearCliente: _crearCliente,
+		buscarCliente: _buscarCliente, // igual sobra
+		Cliente: _Cliente,
 		eliminarCliente: _eliminarCliente,
 		modificarCliente: _modificarCliente
 	}
