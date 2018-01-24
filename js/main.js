@@ -30,7 +30,7 @@ var CrudClientes = (function(){
 		ClienteList.init(_conf.urlApi);	
 	}
 	// Asocio los manejadores de eventos a los botones de la interfaz
-	$('#btNuevoCliente').on('click', ClienteView.mostrar);
+	$('#contenido').on('click', '#btNuevoCliente', ClienteView.mostrar);
 	
 	// EJECUCIÓN
 	
