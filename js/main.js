@@ -57,7 +57,23 @@ var CrudClientes = (function(){
 		ClienteView.mostrar();
 	});
 	// btEliminarCliente
-	// btInsertarCliente
+	$('#contenido').on('click', '#btEliminarCliente', function(event){
+		// Pillo el id del cliente que se pretende eliminar
+		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
+		// Pillo el cliente que tiene ese id
+		var clienteObjetivo = ClienteList.buscarCliente(idCliente);
+		// Y llamo a ClientList para que lo elimine
+		ClienteList.eliminarCliente(clienteObjetivo);
+		// Y regenero la vista de ClientListView
+		ClienteListView.generar(ClienteList.listaClientes);
+	});
+	// btEnviarNuevo
+	$('#contenido').on('click', '#btEnviarNuevo', function(event){
+		// Recupera los datos del formulario
+		var datos = ClienteView.obtenerDatos();
+		// Y LOS MANDA PARA MODIFICAR
+		// TO-DO
+	});
 
 	// EJECUCIÓN
 	// Compruebo que se hayan cargado el resto de módulos

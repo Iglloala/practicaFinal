@@ -14,18 +14,18 @@
 		        </button>
 			</div>
 			<div class="modal-body">
-				<form action="">
+				<form id='formClienteView' action="">
 					<!-- id -->
-					<input type="hidden" name='id' value={{id}}>
+					<input id='id' type="hidden" name='id' value={{id}}>
 					<!-- Nombres -->
 					<div class="form-group">
 						<label for="nombres">Nombres</label>
-						<input type="text" class="form-control" name='nombres' value="{{nombres}}">
+						<input id='nombres' type="text" class="form-control" name='nombres' value="{{nombres}}">
 					</div>
 					<!-- Ciudad -->
 					<div class="form-group">
 						<label for="ciudad">Ciudad</label>
-						<input type="text" class="form-control" name='ciudad' value="{{ciudad}}">
+						<input id='ciudad' type="text" class="form-control" name='ciudad' value="{{ciudad}}">
 					</div>
 					<!-- Sexo -->
 					<div class="form-group">
@@ -43,7 +43,7 @@
 					<!-- Teléfono -->
 					<div class="form-group">
 						<label for="nombres">Teléfono</label>
-						<input type="text" class="form-control" name='telefono' value="{{telefono}}">
+						<input id ='telefono' type="text" class="form-control" name='telefono' value="{{telefono}}">
 					</div>
 					<!-- Fecha nacimiento -->
 					<div class="form-group">
@@ -54,7 +54,7 @@
 			</div>
 			<div class="modal-footer">
 				<!-- Controles -->
-				<button id="btEnviar" class="btn btn-primary">Enviar</button>				
+				<button id="btEnviar{{#if id}}Modificar{{else}}Nuevo{{/if}}" class="btn btn-primary">Enviar</button>				
 			</div>
 		</div>
 	</div>

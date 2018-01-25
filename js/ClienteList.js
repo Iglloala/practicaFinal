@@ -73,18 +73,18 @@ var ClienteList = (function(){
 	}
 
 	// Función para eliminar un cliente
-	var _eliminarCliente = function(idCliente){
-		console.log('Eliminando cliente id:' + idCliente);
+	var _eliminarCliente = function(cliente){
+		console.log('Eliminando cliente id:' + cliente.id);
 		// Empiezo una peticion ajax (POR POST PARA PASAR EL ID)
-		var jqxhr = $.ajax({url:_urlApi+'eliminar.php', data:{id:idCliente}, method:'POST'});
+		var jqxhr = $.ajax({url:_urlApi+'eliminar.php', data:{id:cliente.id}, method:'POST'});
 		jqxhr.done(function(respuesta){
 			// Si la 'respuesta' termina con 'correctamente' pues que notifique de la eliminacion
 			if (respuesta.indexOf('correctamente') != -1){
 				console.log('Cliente eliminado');
-				// Busca en el listado un cliente con el idCliente y lo elimina del array
+				// Busca en el listado un cliente con el cliente.id y lo elimina del array
 				var indice;
 				for (var i=0; i<_listaClientes.length; i++){
-					if (_listaClientes[i].id == idCliente){
+					if (_listaClientes[i].id == cliente.id){
 						indice = i;
 						break;
 					}

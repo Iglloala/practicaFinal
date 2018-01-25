@@ -41,6 +41,20 @@ var ClienteView = (function(){
 		_bloqueContenido.find('.modal').modal("hide");
 	}
 
+	// Función que me devuelve un objeto con todos los datos de la vista
+	function _obtenerDatos(){
+		var datos = {};
+		// Pillo los datos
+		datos.id = $('#formClienteView #id').val();
+		datos.nombres = $('#formClienteView #nombres').val();
+		datos.ciudad = $('#formClienteView #ciudad').val();
+		datos.sexo = ($('#formClienteView #sexoMasculino').attr('checked') == 'checked')?'M':'F';
+		datos.telefono = $('#formClienteView #telefono').val();
+		datos.fecha_nacimiento = $('#formClienteView #inputFecha');
+		// Y retorno un objeto plano con todos los datos
+		return datos;
+	}
+
 	// Ejecución
 	_init();
 
@@ -49,5 +63,6 @@ var ClienteView = (function(){
 		generar: _generar,
 		mostrar: _mostrar,
 		ocultar: _ocultar,
+		obtenerDatos: _obtenerDatos,
 	}
 })();
