@@ -22,17 +22,49 @@ var CrudClientes = (function(){
 			return false;
 		}
 	}
-	
-	// INICIALIZACION
+
+	// HELPERS HANDLEBARS 
+	// Registro un helper para cambiar cómo se muestra la fecha
+	Handlebars.registerHelper('transformarFecha', function(fechaOriginal){
+		var regexp = /(\d{4})-(\d{2})-(\d{2}) (\d{2}:\d{2}:\d{2})/g;
+		var coincidencias = regexp.exec(fechaOriginal);
+		if (fechaOriginal!="" && coincidencias.length>=4){
+			var fechaTransformada =  coincidencias[2] + "/" + coincidencias[3] + "/" + coincidencias[1] ;
+			return fechaTransformada;
+		}
+		else{
+			return fechaOriginal;
+		}
+	});
+
+	// EVENTOS
+	//- btNuevoCliente
+	$('#contenido').on('click', '#btNuevoCliente', function(event){
+		// Genera un ClienteView sin datos
+		ClienteView.generar();
+		// Y muestra el modal
+		ClienteView.mostrar();
+	});
+	// btModificarCliente
+	$('#contenido').on('click', '#btModificarCliente', function(event){
+		// Pillo el id del cliente que se pretende modificar
+		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
+		// Pillo el cliente que tiene ese id
+		var clienteObjetivo = ClienteList.buscarCliente(idCliente);
+		// Le pido a ClientView que regenere el modal
+		ClienteView.generar(clienteObjetivo);
+		// Y que abra el modal
+		ClienteView.mostrar();
+	});
+	// btEliminarCliente
+	// btInsertarCliente
+
+	// EJECUCIÓN
 	// Compruebo que se hayan cargado el resto de módulos
 	if (comprobarDependencias()) {
-		// Inicializo los modulos que necesiten datos del controlador
+		// Inicializo ClienteList pasándole la url de configuración
 		ClienteList.init(_conf.urlApi);	
 	}
-	// Asocio los manejadores de eventos a los botones de la interfaz
-	$('#contenido').on('click', '#btNuevoCliente', ClienteView.mostrar);
-	
-	// EJECUCIÓN
 	
 	
 	// Objeto devuelto por el módulo

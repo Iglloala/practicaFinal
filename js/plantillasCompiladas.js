@@ -22,11 +22,11 @@ templates['cliente'] = template({"1":function(container,depth0,helpers,partials,
     + ">\r\n								<label for=\"sexoFemenino\" class=\"form-check-label\">Femenino</label>\r\n							</div>\r\n						</div>\r\n					</div>\r\n					<!-- Teléfono -->\r\n					<div class=\"form-group\">\r\n						<label for=\"nombres\">Teléfono</label>\r\n						<input type=\"text\" class=\"form-control\" name='telefono' value=\""
     + alias4(((helper = (helper = helpers.telefono || (depth0 != null ? depth0.telefono : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"telefono","hash":{},"data":data}) : helper)))
     + "\">\r\n					</div>\r\n					<!-- Fecha nacimiento -->\r\n					<div class=\"form-group\">\r\n						<label for=\"nombres\">Fecha nacimiento</label>\r\n						<input  id='inputFecha' type=\"text\" class=\"form-control\" name='fecha_nacimiento' value=\""
-    + alias4(((helper = (helper = helpers.fechaNacimiento || (depth0 != null ? depth0.fechaNacimiento : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fechaNacimiento","hash":{},"data":data}) : helper)))
+    + ((stack1 = (helpers.transformarFecha || (depth0 && depth0.transformarFecha) || alias2).call(alias1,(depth0 != null ? depth0.fecha_nacimiento : depth0),{"name":"transformarFecha","hash":{},"data":data})) != null ? stack1 : "")
     + "\">\r\n					</div>\r\n				</form>\r\n			</div>\r\n			<div class=\"modal-footer\">\r\n				<!-- Controles -->\r\n				<button id=\"btEnviar\" class=\"btn btn-primary\">Enviar</button>				\r\n			</div>\r\n		</div>\r\n	</div>\r\n</div>\r\n";
 },"useData":true});
 templates['listaClientes'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "					<tr data-id='"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -39,8 +39,8 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
     + "</td>\r\n						<td>"
     + alias4(((helper = (helper = helpers.telefono || (depth0 != null ? depth0.telefono : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"telefono","hash":{},"data":data}) : helper)))
     + "</td>\r\n						<td>"
-    + alias4(((helper = (helper = helpers.fecha_nacimiento || (depth0 != null ? depth0.fecha_nacimiento : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fecha_nacimiento","hash":{},"data":data}) : helper)))
-    + "</td>\r\n						<td><i class='fas fa-edit'></i>&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>\r\n					</tr>\r\n";
+    + ((stack1 = (helpers.transformarFecha || (depth0 && depth0.transformarFecha) || alias2).call(alias1,(depth0 != null ? depth0.fecha_nacimiento : depth0),{"name":"transformarFecha","hash":{},"data":data})) != null ? stack1 : "")
+    + "</td>\r\n						<td>\r\n							<button id='btModificarCliente'>\r\n								<i class='fas fa-edit'></i>\r\n							</button>\r\n							<button id='btEliminarCliente'>\r\n								<i class='fas fa-trash-alt'></i>\r\n							</button>\r\n						</td>\r\n					</tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

@@ -11,16 +11,6 @@ var ClienteList = (function(){
 		_cargarClientes();
 	}
 
-	// _Cliente: Método factory que retorna un objeto Cliente
-	var _Cliente = function(id, nombres, ciudad, sexo, telefono, fecha_nacimiento){
-		this.id = id;
-		this.nombres = nombres;
-		this.ciudad = ciudad;
-		this.sexo = sexo;
-		this.telefono = telefono;
-		this.fecha_nacimiento = fecha_nacimiento;
-	}
-
 	// _actualizarListado: Recibe como parámetro la respuesta de la api, la convierte en un 
 	// array de objetos cliente y define o actualiza la propiedad listaClientes del módulo
 	var _actualizarListado = function(respuesta){
@@ -28,15 +18,8 @@ var ClienteList = (function(){
 			var respuestaJSON = JSON.parse(respuesta);
 			_listaClientes.length = 0; // vacío el array sin perder su referencia
 			for (indice in respuestaJSON){
-				// Preparo los campos
-				var id = respuestaJSON[indice].id;
-				var nombres = respuestaJSON[indice].nombres;
-				var ciudad = respuestaJSON[indice].ciudad;
-				var sexo = respuestaJSON[indice].sexo;
-				var telefono = respuestaJSON[indice].telefono;
-				var fecha_nacimiento = respuestaJSON[indice].fechaNacimiento;
 				// Creo un objeto cliente
-				var cliente = new _Cliente(id, nombres, ciudad, sexo, telefono, fecha_nacimiento);
+				var cliente = new Factory.Cliente(respuestaJSON[indice]);
 				// Lo añado a _listaClientes
 				_listaClientes.push(cliente)
 			}
@@ -53,7 +36,7 @@ var ClienteList = (function(){
 		});
 	}
 
-	// Función para buscar el índice de un cliente mediante su id
+	// Función para recuperar un cliente mediante su id
 	var _buscarCliente = function(id){
 		var indiceCorrecto = -1;
 		for (var i=0; i<_listaClientes.length; i++){
@@ -62,7 +45,7 @@ var ClienteList = (function(){
 				break;
 			}
 		}
-		return indiceCorrecto;
+		return (indiceCorrecto != -1)?_listaClientes[indiceCorrecto]:false;
 	}
 
 	// Función para insertar un nuevo cliente
@@ -92,8 +75,8 @@ var ClienteList = (function(){
 	// Función para eliminar un cliente
 	var _eliminarCliente = function(idCliente){
 		console.log('Eliminando cliente id:' + idCliente);
-		// Empiezo una peticion ajax (POR GET PARA PASAR EL ID)
-		var jqxhr = $.ajax({url:_urlApi+'eliminar.php', data:{id:idCliente}, method:'GET'});
+		// Empiezo una peticion ajax (POR POST PARA PASAR EL ID)
+		var jqxhr = $.ajax({url:_urlApi+'eliminar.php', data:{id:idCliente}, method:'POST'});
 		jqxhr.done(function(respuesta){
 			// Si la 'respuesta' termina con 'correctamente' pues que notifique de la eliminacion
 			if (respuesta.indexOf('correctamente') != -1){
@@ -166,7 +149,7 @@ var ClienteList = (function(){
 		//cargarClientes : _cargarClientes, // igual sobra
 		insertarCliente: _insertarCliente,
 		buscarCliente: _buscarCliente, // igual sobra
-		Cliente: _Cliente,
+		//Cliente: _Cliente,
 		eliminarCliente: _eliminarCliente,
 		modificarCliente: _modificarCliente
 	}

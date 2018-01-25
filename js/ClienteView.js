@@ -14,12 +14,10 @@ var ClienteView = (function(){
 				return "";
 			}
 		});
-		// Genero la ventana modal
-		_generar();
 	};
 
 	// Función para generar la vista de la ventana modal
-	function _generar(cliente={id:'', nombres:'', ciudad:'', sexo:'', telefono:'', fechaNacimiento:''}){
+	function _generar(cliente={id:'', nombres:'', ciudad:'', sexo:'', telefono:'', fecha_nacimiento:''}){
 		var html = Handlebars.templates.cliente(cliente);
 		// Si no existe el modal lo añado
 		if (!_bloqueContenido.find('#clienteView').length){

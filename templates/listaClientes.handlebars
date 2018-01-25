@@ -19,8 +19,15 @@
 						<td>{{ciudad}}</td>
 						<td>{{sexo}}</td>
 						<td>{{telefono}}</td>
-						<td>{{fecha_nacimiento}}</td>
-						<td><i class='fas fa-edit'></i>&nbsp;&nbsp;<i class='fas fa-trash-alt'></i></td>
+						<td>{{{transformarFecha fecha_nacimiento}}}</td>
+						<td>
+							<button id='btModificarCliente'>
+								<i class='fas fa-edit'></i>
+							</button>
+							<button id='btEliminarCliente'>
+								<i class='fas fa-trash-alt'></i>
+							</button>
+						</td>
 					</tr>
 				{{/each}}
 			</tbody>
