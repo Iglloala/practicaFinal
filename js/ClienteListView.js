@@ -11,21 +11,16 @@ var ClienteListView = (function(){
 		var subscribeEliminacion = PubSub.subscribe("cliente/eliminado", _generar);
 	}
 
-	function _generar(data){
+	function _generar(arrayClientes){
 		console.log('Actualizando la vista del listado de clientes');
-		// Lista clientes es un objeto con objetos cliente dentro.
-		// Lo voy a convertir a un objeto con un array clientes dentro con objetos cliente para poder iterarlo con handlebars
-		var datosPlantilla = {clientes : []};
-		for (cliente in data.clientes){
-			datosPlantilla.clientes.push(data.clientes[cliente]);
-		}
-		// Ahora ya pues lo paso a handlebars para que cree el html
-		var html = Handlebars.templates.listaClientes(datosPlantilla);
-		// Si no existe en el documento lo añade
+		// Genero el html pasándole a Handlebars el array con todos los clientes
+		// que me trae el publicador
+		var html = Handlebars.templates.listaClientes(arrayClientes);
+		// Si la vista no existe en el documento la añade
 		if (!_bloqueContenido.find('#clienteListView').length){
 			_bloqueContenido.append(html);
 		}
-		// Y si ya existe lo reemplaza
+		// Y si ya existe la reemplaza
 		else {
 			_bloqueContenido.find('#clienteListView').replaceWith(html);
 		}
@@ -33,6 +28,7 @@ var ClienteListView = (function(){
 
 	// Ejecución
 	_init();
+	
 	// Retorno
 	return {
 		generar: _generar,

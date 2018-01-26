@@ -71,8 +71,12 @@ var CrudClientes = (function(){
 	$('#contenido').on('click', '#btEnviarNuevo', function(event){
 		// Recupera los datos del formulario
 		var datos = ClienteView.obtenerDatos();
-		// Y LOS MANDA PARA MODIFICAR
-		// TO-DO
+		// Los convierte en un objeto Cliente
+		var nuevoCliente = new Factory.Cliente(datos);
+		// Los manda a insertar
+		ClienteList.insertarCliente(nuevoCliente);
+		// Y cierra la ventana modal
+		ClienteView.ocultar();
 	});
 
 	// EJECUCIÓN
