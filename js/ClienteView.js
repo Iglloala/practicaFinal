@@ -28,7 +28,7 @@ var ClienteView = (function(){
 			_bloqueContenido.find('#clienteView').replaceWith(html);
 		}
 		// En ambos casos convierto #inputFecha en un datepicker
-		_bloqueContenido.find('#inputFecha').datepicker({dateFormat:'dd/mm/yy'});
+		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true'});
 	}
 
 	// Función que muestra la ventana modal de ClienteView
