@@ -28,7 +28,7 @@ var ClienteView = (function(){
 			_bloqueContenido.find('#clienteView').replaceWith(html);
 		}
 		// En ambos casos convierto #inputFecha en un datepicker
-		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true'});
+		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true', yearRange:'1900:2018', dateFormat:'dd-mm-yy'});
 	}
 
 	// Función que muestra la ventana modal de ClienteView
@@ -51,7 +51,7 @@ var ClienteView = (function(){
 		datos.sexo = ($('#formClienteView #sexoMasculino').prop("checked"))?'M':'F';
 		datos.telefono = $('#formClienteView #telefono').val();
 		var fecha = $('#formClienteView #inputFecha').datepicker('getDate');
-		datos.fecha_nacimiento = fecha.toLocaleString();
+		datos.fechaNacimiento = fecha.toISOString();
 		// Y retorno un objeto plano con todos los datos
 		return datos;
 	}

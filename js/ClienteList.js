@@ -55,6 +55,7 @@ var ClienteList = (function(){
 		// 'alternativas' con el valor del sexo
 		cliente.submit = 'submit';
 		cliente.alternativas = cliente.sexo;
+		// Tb lo modifico para que la fecha tenga el formato correcto: yyyy-mm-dd hh:mm:ss
 		// Intenta insertarlo en la bbdd mediante petición ajax
 		var jqxhr = $.ajax({url:_urlApi+"nuevo.php", data:cliente, method:'POST'});
 		var that = this;

@@ -29,7 +29,7 @@ var CrudClientes = (function(){
 		var regexp = /(\d{4})-(\d{2})-(\d{2}) (\d{2}:\d{2}:\d{2})/g;
 		var coincidencias = regexp.exec(fechaOriginal);
 		if (fechaOriginal!="" && coincidencias.length>=4){
-			var fechaTransformada =  coincidencias[2] + "/" + coincidencias[3] + "/" + coincidencias[1] ;
+			var fechaTransformada =  coincidencias[3] + "/" + coincidencias[2] + "/" + coincidencias[1] ;
 			return fechaTransformada;
 		}
 		else{
@@ -75,6 +75,17 @@ var CrudClientes = (function(){
 		var nuevoCliente = new Factory.Cliente(datos);
 		// Los manda a insertar
 		ClienteList.insertarCliente(nuevoCliente);
+		// Y cierra la ventana modal
+		ClienteView.ocultar();
+	});
+	// btEnviarModificar
+	$('#contenido').on('click', '#btEnviarModificar', function(event){
+		// Recupera los datos del formulario
+		var datos = ClienteView.obtenerDatos();
+		// Los convierte en un objeto Cliente
+		var nuevoCliente = new Factory.Cliente(datos);
+		// Los manda a modificar
+		ClienteList.modificarCliente(nuevoCliente);
 		// Y cierra la ventana modal
 		ClienteView.ocultar();
 	});

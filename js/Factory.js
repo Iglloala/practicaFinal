@@ -11,10 +11,10 @@ var Factory = (function(){
 		this.fecha_nacimiento = jsonData.fechaNacimiento;
 	};
 	// Añado un método para transformar un cliente en json
-	// _Cliente.prototype.transform2JSON = function(){
-	// 	dataJSON = JSON.stringify(this); 
-	// 	return dataJSON;
-	// }
+	_Cliente.prototype.transform2JSON = function(){
+		dataJSON = JSON.stringify(this);
+		return dataJSON;
+	}
 
 	// RETORNO DEL MÓDULO
 	return {
