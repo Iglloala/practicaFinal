@@ -1,11 +1,11 @@
 // Defino el módulo principal de mi aplicación
 var CrudClientes = (function(){
-	// PROPIEDADES DEL MÓDULO
+	// PROPIEDADES
 	var _conf = {
 		urlApi: "http://localhost/dwc/PROFESOR/API/",
 	}
 
-	// MÉTODOS DEL MÓDULO
+	// MÉTODOS
 	function comprobarDependencias(){
 		try {
 			if (typeof jQuery == 'undefined') throw new Error('No se ha cargado la librería jQuery');
@@ -38,57 +38,7 @@ var CrudClientes = (function(){
 	});
 
 	// EVENTOS
-	//- btNuevoCliente
-	$('#contenido').on('click', '#btNuevoCliente', function(event){
-		// Genera un ClienteView sin datos
-		ClienteView.generar();
-		// Y muestra el modal
-		ClienteView.mostrar();
-	});
-	// btModificarCliente
-	$('#contenido').on('click', '#btModificarCliente', function(event){
-		// Pillo el id del cliente que se pretende modificar
-		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
-		// Pillo el cliente que tiene ese id
-		var clienteObjetivo = ClienteList.buscarCliente(idCliente);
-		// Le pido a ClientView que regenere el modal
-		ClienteView.generar(clienteObjetivo);
-		// Y que abra el modal
-		ClienteView.mostrar();
-	});
-	// btEliminarCliente
-	$('#contenido').on('click', '#btEliminarCliente', function(event){
-		// Pillo el id del cliente que se pretende eliminar
-		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
-		// Pillo el cliente que tiene ese id
-		var clienteObjetivo = ClienteList.buscarCliente(idCliente);
-		// Y llamo a ClientList para que lo elimine
-		ClienteList.eliminarCliente(clienteObjetivo);
-		// Y regenero la vista de ClientListView
-		ClienteListView.generar(ClienteList.listaClientes);
-	});
-	// btEnviarNuevo
-	$('#contenido').on('click', '#btEnviarNuevo', function(event){
-		// Recupera los datos del formulario
-		var datos = ClienteView.obtenerDatos();
-		// Los convierte en un objeto Cliente
-		var nuevoCliente = new Factory.Cliente(datos);
-		// Los manda a insertar
-		ClienteList.insertarCliente(nuevoCliente);
-		// Y cierra la ventana modal
-		ClienteView.ocultar();
-	});
-	// btEnviarModificar
-	$('#contenido').on('click', '#btEnviarModificar', function(event){
-		// Recupera los datos del formulario
-		var datos = ClienteView.obtenerDatos();
-		// Los convierte en un objeto Cliente
-		var nuevoCliente = new Factory.Cliente(datos);
-		// Los manda a modificar
-		ClienteList.modificarCliente(nuevoCliente);
-		// Y cierra la ventana modal
-		ClienteView.ocultar();
-	});
+	// No hay eventos ya que todo se dispara mediante PubSub y/o en sus respectivas vistas
 
 	// EJECUCIÓN
 	// Compruebo que se hayan cargado el resto de módulos
@@ -98,7 +48,7 @@ var CrudClientes = (function(){
 	}
 	
 	
-	// Objeto devuelto por el módulo
+	// RETORNO
 	return {
 		conf: _conf,
 	};

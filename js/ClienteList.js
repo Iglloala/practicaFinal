@@ -1,14 +1,19 @@
 var ClienteList = (function(){
-	// Propiedades
+	// PROPIEDADES
 	var that = this;
 	var _listaClientes=[];
 	var _urlApi;
 
-	// Métodos
+	// MÉTODOS
 	var _init = function(urlApi){
 		// Define la url de la api
 		_urlApi = urlApi;
 		_cargarClientes();
+		// Se subscribe a eventos
+		PubSub.subscribe("btPulsado/modificar", _buscaParaModificar);
+		PubSub.subscribe("btPulsado/eliminar", _buscaParaEliminar);
+		PubSub.subscribe("generado/nuevoClienteInsertar", _insertarCliente);
+		PubSub.subscribe("generado/nuevoClienteModificar", _modificarCliente);
 	}
 
 	// _actualizarListado: Recibe como parámetro la respuesta de la api, la convierte en un 
@@ -38,6 +43,7 @@ var ClienteList = (function(){
 
 	// Función para recuperar un cliente mediante su id
 	var _buscarCliente = function(id){
+		// Empieza a buscar
 		var indiceCorrecto = -1;
 		for (var i=0; i<_listaClientes.length; i++){
 			if (_listaClientes[i].id == id){
@@ -46,6 +52,26 @@ var ClienteList = (function(){
 			}
 		}
 		return (indiceCorrecto != -1)?_listaClientes[indiceCorrecto]:false;
+	}
+
+	// Función que busca un cliente y lo publica para modificar
+	var _buscaParaModificar = function(id){
+		// Busca el cliente
+		var cliente = _buscarCliente(id);
+		if (cliente){
+			// Y entonces lo publica para modificar
+			PubSub.publish('clienteEncontrado/modificar', cliente);
+		}
+	}
+
+	// Función que busca un cliente y lo publica para eliminar
+	var _buscaParaEliminar = function(id){
+		// Busca el cliente
+		var cliente = _buscarCliente(id)
+		if (cliente){
+			// Y entonces llama a _eliminarCliente con dicho cliente
+			_eliminarCliente(cliente);
+		}
 	}
 
 	// Función para insertar un nuevo cliente
@@ -60,7 +86,7 @@ var ClienteList = (function(){
 		var jqxhr = $.ajax({url:_urlApi+"nuevo.php", data:cliente, method:'POST'});
 		var that = this;
 		jqxhr.done(function(respuesta){
-			console.log('Cliente insertado en la bbdd:\n'+respuesta);
+			console.log('Cliente insertado en la bbdd');
 			// Y como no hay manera de obtener de forma fiable el id del nuevo cliente
 			// insertado pues actualizo la 'listaClientes' machacando su valor anterior
 			// por el nuevo listado que devuelve nuevo.php
@@ -143,14 +169,12 @@ var ClienteList = (function(){
 		});
 	}
 
-	// Retorno
+	// RETORNO
 	return {
 		listaClientes: _listaClientes,
 		init: _init,
-		//cargarClientes : _cargarClientes, // igual sobra
 		insertarCliente: _insertarCliente,
 		buscarCliente: _buscarCliente, // igual sobra
-		//Cliente: _Cliente,
 		eliminarCliente: _eliminarCliente,
 		modificarCliente: _modificarCliente
 	}

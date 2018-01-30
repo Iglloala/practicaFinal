@@ -1,8 +1,29 @@
 var ClienteView = (function(){
-	// Propiedades
+	// PROPIEDADES
 	var _bloqueContenido = $('#contenido');
 
-	// Métodos
+	// EVENTOS
+	//- btEnviarNuevo
+	$('#contenido').on('click', '#btEnviarNuevo', function(event){
+		// Recupera los datos del formulario
+		var datos = _obtenerDatos();
+		// Publica un "btPulsado/EnviarNuevo" con los datos para que los pille Factory
+		PubSub.publish("btPulsado/enviarNuevo", datos);
+		// Y cierra la ventana modal
+		_ocultar();
+	});
+
+	// btEnviarModificar
+	$('#contenido').on('click', '#btEnviarModificar', function(event){
+		// Recupera los datos del formulario
+		var datos = _obtenerDatos();
+		// Publica un "btPulsado/enviarModificar" con los datos para que los pille Factory
+		PubSub.publish("btPulsado/enviarModificar", datos);
+		// Y cierra la ventana modal
+		_ocultar();
+	});
+
+	// MÉTODOS
 	function _init(){
 		// Registro un helper de handlebars para añadir el atributo cheked a un radiobutton
 		// teniendo en cuenta el valor del radioButton y el valor de cliente.sexo
@@ -14,6 +35,9 @@ var ClienteView = (function(){
 				return "";
 			}
 		});
+		// Se subscribe a eventos del publicador
+		PubSub.subscribe("btPulsado/nuevoCliente", _generar);
+		PubSub.subscribe("clienteEncontrado/modificar", _generar);
 	};
 
 	// Función para generar la vista de la ventana modal
@@ -29,16 +53,18 @@ var ClienteView = (function(){
 		}
 		// En ambos casos convierto #inputFecha en un datepicker
 		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true', yearRange:'1900:2018', dateFormat:'dd-mm-yy'});
+		// Y llama a _mostrar para que se vea le modal
+		_mostrar();
 	}
 
 	// Función que muestra la ventana modal de ClienteView
 	function _mostrar(){
-		_bloqueContenido.find('.modal').modal("show");
+		_bloqueContenido.find('#clienteView').modal("show");
 	}
 
 	// Función que oculta la ventana modal de ClienteView
 	function _ocultar(){
-		_bloqueContenido.find('.modal').modal("hide");
+		_bloqueContenido.find('#clienteView').modal("hide");
 	}
 
 	// Función que me devuelve un objeto con todos los datos de la vista
@@ -56,10 +82,10 @@ var ClienteView = (function(){
 		return datos;
 	}
 
-	// Ejecución
+	// EJECUCIÓN
 	_init();
 
-	// Retorno
+	// RETORNO
 	return {
 		generar: _generar,
 		mostrar: _mostrar,

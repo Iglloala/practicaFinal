@@ -1,8 +1,33 @@
 var ClienteListView = (function(){
-	// Propiedades
+	// PROPIEDADES
 	var _bloqueContenido = $('#contenido');
 
-	// Métodos
+	// EVENTOS
+	//- btNuevoCliente
+	$('#contenido').on('click', '#btNuevoCliente', function(event){
+		// Publica que se ha pulsado el botón btNuevoCliente para que responda ClientView
+		// Tengo que pasarle un objeto cliente vacío para que el helper transformarFecha no explote
+		var dummy = {id:'', nombres:'', ciudad:'', sexo:'', telefono:'', fecha_nacimiento:''};
+		PubSub.publish("btPulsado/nuevoCliente", dummy);
+	});
+
+	// btModificarCliente
+	$('#contenido').on('click', '#btModificarCliente', function(event){
+		// Pillo el id del cliente que se pretende modificar
+		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
+		// Y publico que se ha pulsado el botón (pasando el id del cliente)
+		PubSub.publish('btPulsado/modificar', idCliente);
+	});
+
+	// btEliminarCliente
+	$('#contenido').on('click', '#btEliminarCliente', function(event){
+		// Pillo el id del cliente que se pretende eliminar
+		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
+		// Publico que se ha pulsado el botón (pasando el id del cliente)
+		PubSub.publish('btPulsado/eliminar', idCliente);
+	});
+
+	// MÉTODOS
 	function _init(){
 		// Se registran los suscriptores para la actualización de la vista
 		var subscribeCargaInicial = PubSub.subscribe("carga/inicial", _generar);
@@ -26,10 +51,10 @@ var ClienteListView = (function(){
 		}
 	}
 
-	// Ejecución
+	// EJECUCIÓN
 	_init();
 	
-	// Retorno
+	// RETORNO
 	return {
 		generar: _generar,
 	}
