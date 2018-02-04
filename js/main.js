@@ -2,7 +2,7 @@
 var CrudClientes = (function(){
 	// PROPIEDADES
 	var _conf = {
-		urlApi: "http://localhost/dwc/PROFESOR/API/",
+		urlApi: "http://localhost/dwc/APIextendida/",
 	}
 
 	// MÉTODOS
