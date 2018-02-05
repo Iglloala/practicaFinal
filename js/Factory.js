@@ -12,7 +12,10 @@ var Factory = (function(){
 		this.ciudad = jsonData.ciudad;
 		this.sexo = jsonData.sexo;
 		this.telefono = jsonData.telefono;
-		this.fecha_nacimiento = jsonData.fechaNacimiento;
+		this.fecha_nacimiento = jsonData.fecha_nacimiento;
+		this.direccion = jsonData.direccion;
+		this.provincia = jsonData.provincia;
+		this.fecha_alta = jsonData.fecha_alta;
 	};
 	// Añado un método para transformar un cliente en json
 	// Lo comento xq sino me da "Uncaught TypeError: Converting circular structure to JSON"

@@ -50,6 +50,23 @@
 						<label for="nombres">Fecha nacimiento</label>
 						<input  id='inputFecha' type="text" class="form-control" name='fecha_nacimiento' value="{{{transformarFecha fecha_nacimiento}}}">
 					</div>
+					<!-- Dirección -->
+					<div class="form-group">
+						<label for="direccion">Dirección:</label>
+						<input type="text" id="direccion" class="form-control" name='direccion' value='{{{direccion}}}'>
+					</div>
+					<!-- Provincia -->
+					<div class="form-group">
+						<label for="provincia">Provincia:</label>
+						<input type="text" id="provincia" class="form-control" name='provincia' value='{{provincia}}'>
+					</div>
+					<!-- Fecha de alta -->
+					{{#if id}}
+						<div class="form-group">
+							<label for="nombres">Fecha de alta</label>
+							<input  id='fecha_alta' type="text" class="form-control" name='fecha_alta' value="{{{transformarFecha fecha_alta}}}">
+						</div>
+					{{/if}}
 				</form>
 			</div>
 			<div class="modal-footer">

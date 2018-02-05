@@ -134,7 +134,7 @@ var ClienteList = (function(){
 	var _modificarCliente = function(cliente){
 		console.log('Modificando cliente con id:' + cliente.id);
 		// Ahora construyo los datos de la petición:
-		// <Los de un cliente> + submit + sexo=alternativas + fechaNacimiento=fecha_nacimiento
+		// <Los de un cliente> + submit + sexo=alternativas
 		var data = {
 			submit:'submit',
 			cliente_id: cliente.id,
@@ -143,6 +143,9 @@ var ClienteList = (function(){
 			alternativas: cliente.sexo,
 			telefono: cliente.telefono,
 			fecha_nacimiento: cliente.fecha_nacimiento,
+			direccion: cliente.direccion,
+			provincia: cliente.provincia,
+			fecha_alta: cliente.fecha_alta,
 		}
 		// Y ejecuto la petición por post
 		var jqxhr = $.ajax({url:_urlApi+'actualizar.php', data:data, method:'POST'});

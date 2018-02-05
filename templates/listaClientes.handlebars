@@ -8,7 +8,10 @@
 					<th>Ciudad</th>
 					<th>Sexo</th>
 					<th>Teléfono</th>
-					<th>Fecha nacimiento</th>
+					<th>Fecha de nacimiento</th>
+					<th>Dirección</th>
+					<th>Provincia</th>
+					<th>Fecha de alta</th>
 					<th>Controles</th>
 				</tr>
 			</thead>
@@ -19,7 +22,10 @@
 						<td>{{ciudad}}</td>
 						<td>{{sexo}}</td>
 						<td>{{telefono}}</td>
-						<td>{{{transformarFecha fecha_nacimiento}}}</td>
+						<td>{{transformarFecha fecha_nacimiento}}</td>
+						<td>{{direccion}}</td>
+						<td>{{provincia}}</td>
+						<td>{{transformarFecha fecha_alta}}</td>
 						<td>
 							<button id='btModificarCliente'>
 								<i class='fas fa-edit'></i>

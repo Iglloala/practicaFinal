@@ -26,7 +26,7 @@ var CrudClientes = (function(){
 	// HELPERS HANDLEBARS 
 	// Registro un helper para cambiar cómo se muestra la fecha
 	Handlebars.registerHelper('transformarFecha', function(fechaOriginal){
-		var regexp = /(\d{4})-(\d{2})-(\d{2}) (\d{2}:\d{2}:\d{2})/g;
+		var regexp = /(\d{4})-(\d{2})-(\d{2})/g;
 		var coincidencias = regexp.exec(fechaOriginal);
 		if (fechaOriginal!="" && coincidencias.length>=4){
 			var fechaTransformada =  coincidencias[3] + "/" + coincidencias[2] + "/" + coincidencias[1] ;
@@ -44,7 +44,7 @@ var CrudClientes = (function(){
 	// Compruebo que se hayan cargado el resto de módulos
 	if (comprobarDependencias()) {
 		// Inicializo ClienteList pasándole la url de configuración
-		ClienteList.init(_conf.urlApi);	
+		ClienteList.init(_conf.urlApi);
 	}
 	
 	
