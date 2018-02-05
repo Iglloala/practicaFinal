@@ -52,7 +52,7 @@ var ClienteView = (function(){
 			_bloqueContenido.find('#clienteView').replaceWith(html);
 		}
 		// En ambos casos convierto #inputFecha en un datepicker
-		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true', yearRange:'1900:2018', dateFormat:'dd-mm-yy'});
+		_bloqueContenido.find('#inputFecha').datepicker({changeYear:'true', changeMonth:'true', yearRange:'1900:2018', dateFormat:'dd/mm/yy'});
 		// Y llama a _mostrar para que se vea le modal
 		_mostrar();
 	}
@@ -76,8 +76,9 @@ var ClienteView = (function(){
 		datos.ciudad = $('#formClienteView #ciudad').val();
 		datos.sexo = ($('#formClienteView #sexoMasculino').prop("checked"))?'M':'F';
 		datos.telefono = $('#formClienteView #telefono').val();
-		var fecha = $('#formClienteView #inputFecha').datepicker('getDate');
-		datos.fechaNacimiento = fecha.toISOString();
+		var fecha = $('#formClienteView #inputFecha').val(); // Pillo la fecha tal cuál
+		fecha = fecha.split("/").reverse().join("-"); // Le da la vuelta y la une con '-'
+		datos.fechaNacimiento = fecha + " 00:00:00"; // Le añade la hora
 		// Y retorno un objeto plano con todos los datos
 		return datos;
 	}
