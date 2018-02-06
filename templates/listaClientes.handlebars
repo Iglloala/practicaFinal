@@ -38,5 +38,36 @@
 				{{/each}}
 			</tbody>
 		</table>
+		<!-- Paginación -->
+		<nav aria-label='Paginación clientes'>
+			<ul class="pagination">
+				<!-- btAnterior -->
+				<li class="page-item {{#if anteriorDesactivado}}disabled{{/if}}">
+					{{#if anteriorDesactivado}}
+						<span class="page-link">Anterior</span>
+					{{else}}
+						<a href="" class="page-link">Anterior</a>
+					{{/if}}
+				</li>
+				<!-- Enlaces -->
+				{{#each paginas}}
+					<li class="page-item {{#if actual}}active{{/if}}">
+						{{#if actual}}
+							<span class="page-link">{{pagina}}</span>
+						{{else}}
+							<a href="" class="page-link">{{pagina}}</a>
+						{{/if}}
+					</li>
+				{{/each}}
+				<!-- btSiguiente -->
+				<li class="page-item {{#if siguienteDesactivado}}disabled{{/if}}">
+					{{#if siguienteDesactivado}}
+						<span class="page-link">Siguiente</span>
+					{{else}}
+						<a href="" class="page-link">Siguiente</a>
+					{{/if}}
+				</li>
+			</ul>			
+		</nav>
 	</div>
 </div>

@@ -65,11 +65,53 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
     + "</td>\r\n						<td>"
     + alias4((helpers.transformarFecha || (depth0 && depth0.transformarFecha) || alias2).call(alias1,(depth0 != null ? depth0.fecha_alta : depth0),{"name":"transformarFecha","hash":{},"data":data}))
     + "</td>\r\n						<td>\r\n							<button id='btModificarCliente'>\r\n								<i class='fas fa-edit'></i>\r\n							</button>\r\n							<button id='btEliminarCliente'>\r\n								<i class='fas fa-trash-alt'></i>\r\n							</button>\r\n						</td>\r\n					</tr>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "disabled";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "						<span class=\"page-link\">Anterior</span>\r\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "						<a href=\"\" class=\"page-link\">Anterior</a>\r\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "					<li class=\"page-item "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.actual : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.actual : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(14, data, 0),"data":data})) != null ? stack1 : "")
+    + "					</li>\r\n";
+},"10":function(container,depth0,helpers,partials,data) {
+    return "active";
+},"12":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "							<span class=\"page-link\">"
+    + container.escapeExpression(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"pagina","hash":{},"data":data}) : helper)))
+    + "</span>\r\n";
+},"14":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "							<a href=\"\" class=\"page-link\">"
+    + container.escapeExpression(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"pagina","hash":{},"data":data}) : helper)))
+    + "</a>\r\n";
+},"16":function(container,depth0,helpers,partials,data) {
+    return "						<span class=\"page-link\">Siguiente</span>\r\n";
+},"18":function(container,depth0,helpers,partials,data) {
+    return "						<a href=\"\" class=\"page-link\">Siguiente</a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<div id='clienteListView' class=\"row\">\r\n	<div class=\"col-12\">\r\n		<button class='btn btn-primary' id='btNuevoCliente' style=\"margin: 1rem 0\">Nuevo Cliente</button>\r\n		<table class='table'>\r\n			<thead class='thead-dark'>\r\n				<tr>\r\n					<th>Nombres</th>\r\n					<th>Ciudad</th>\r\n					<th>Sexo</th>\r\n					<th>Teléfono</th>\r\n					<th>Fecha de nacimiento</th>\r\n					<th>Dirección</th>\r\n					<th>Provincia</th>\r\n					<th>Fecha de alta</th>\r\n					<th>Controles</th>\r\n				</tr>\r\n			</thead>\r\n			<tbody>\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.clientes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "			</tbody>\r\n		</table>\r\n	</div>\r\n</div>";
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.clientes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "			</tbody>\r\n		</table>\r\n		<!-- Paginación -->\r\n		<nav aria-label='Paginación clientes'>\r\n			<ul class=\"pagination\">\r\n				<!-- btAnterior -->\r\n				<li class=\"page-item "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.anteriorDesactivado : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.anteriorDesactivado : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + "				</li>\r\n				<!-- Enlaces -->\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.paginas : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "				<!-- btSiguiente -->\r\n				<li class=\"page-item "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.siguienteDesactivado : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\">\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.siguienteDesactivado : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.program(18, data, 0),"data":data})) != null ? stack1 : "")
+    + "				</li>\r\n			</ul>			\r\n		</nav>\r\n	</div>\r\n</div>";
 },"useData":true});
 })();

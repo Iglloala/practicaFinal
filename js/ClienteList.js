@@ -37,7 +37,7 @@ var ClienteList = (function(){
 		jqxhr.done(function(respuesta){
 			_actualizarListado(respuesta);
 			// Publico la carga inicial de clientes
-			PubSub.publish('carga/inicial', {clientes: _listaClientes});
+			PubSub.publish('carga/inicial', _listaClientes);
 		});
 	}
 

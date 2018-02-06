@@ -1,6 +1,13 @@
 var ClienteListView = (function(){
 	// PROPIEDADES
 	var _bloqueContenido = $('#contenido');
+	// propiedades para paginar
+	var _paginas = [1];
+	var _paginaActual = 1;
+	var _maximoPagina = 5;
+	var _posicionInicio = (_paginaActual * _maximoPagina) - _maximoPagina; // 0 // 5 // 10
+	var _posicionFinal = (_paginaActual * _maximoPagina); // 5 // 10 // 15
+	var _arrayClientes = [];
 
 	// EVENTOS
 	//- btNuevoCliente
@@ -38,9 +45,35 @@ var ClienteListView = (function(){
 
 	function _generar(arrayClientes){
 		console.log('Actualizando la vista del listado de clientes');
-		// Genero el html pasándole a Handlebars el array con todos los clientes
-		// que me trae el publicador
-		var html = Handlebars.templates.listaClientes(arrayClientes);
+		// Construyo los datos que se le van a pasar a Handlebars
+		// - Guardo todos los clientes que me manda ClientList en la propiedad del módulo
+		_arrayClientes = arrayClientes;
+		// - Extraigo el pedazo que voy a usar
+		var trozoClientes = (arrayClientes.length<=_maximoPagina)?arrayClientes:arrayClientes.slice(_posicionInicio, _posicionFinal);
+		// - Calculo los números de página
+		_paginas = (function(arrayClientes){
+			var arrayPaginas = [];
+			for (var c=0, p=1; c<arrayClientes.length; c+=5, p++){
+				var actual = (p==_paginaActual)?true:false;
+				var pagina = {pagina:p, actual:actual};
+				arrayPaginas.push(pagina)
+			}
+			return arrayPaginas;
+		})(arrayClientes);
+		// - Calculo si el botón de 'Anterior' debe de estar desactivado
+		var anteriorDesactivado = (_paginaActual==1)?true:false;
+		// Calculo si el botón 'Siguiente' debe de estar desactivado
+		var siguienteDesactivado = (_paginaActual==_paginas[_paginas.length-1].pagina)?true:false;
+		// - Genero el objeto data
+		var data = {
+			clientes: trozoClientes,
+			paginas : _paginas,
+			anteriorDesactivado: anteriorDesactivado,
+			siguienteDesactivado: siguienteDesactivado,
+		}
+		// Genero el html pasándole a Handlebars el trozo del array clientes que quiero que
+		// se muestre así como el resto de datos necesarios para paginar
+		var html = Handlebars.templates.listaClientes(data);
 		// Si la vista no existe en el documento la añade
 		if (!_bloqueContenido.find('#clienteListView').length){
 			_bloqueContenido.append(html);
