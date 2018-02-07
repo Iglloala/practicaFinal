@@ -111,7 +111,7 @@ var ClienteView = (function(){
 		var language = "es";
 		var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+encodeURI(address)+"&language="+language+"&key="+key;
 		// Inicio una petición ajax
-		var jqxhr = $.ajax({url:url});
+		var jqxhr = $.ajax({url:url, method:'POST'});
 		jqxhr.done(function(respuesta){
 			// Si la respuesta es válida tiene que generar un mapa de google
 			if (respuesta.status == "OK"){

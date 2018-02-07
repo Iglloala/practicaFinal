@@ -33,7 +33,7 @@ var ClienteList = (function(){
 	
 	// _cargarClientes: Método que ejecuta una petición AJAX a la API establece el listado de clientes inicial
 	var _cargarClientes = function(){
-		var jqxhr = $.ajax({url:_urlApi+"/consulta.php"});
+		var jqxhr = $.ajax({url:_urlApi+"/consulta.php", method:'POST'});
 		jqxhr.done(function(respuesta){
 			_actualizarListado(respuesta);
 			// Publico la carga inicial de clientes
