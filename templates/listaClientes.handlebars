@@ -46,7 +46,7 @@
 					{{#if anteriorDesactivado}}
 						<span class="page-link">Anterior</span>
 					{{else}}
-						<a href="" class="page-link">Anterior</a>
+						<a href="" class="page-link btPagina" data-pagina='anterior'>Anterior</a>
 					{{/if}}
 				</li>
 				<!-- Enlaces -->
@@ -55,7 +55,7 @@
 						{{#if actual}}
 							<span class="page-link">{{pagina}}</span>
 						{{else}}
-							<a href="" class="page-link">{{pagina}}</a>
+							<a href="" class="page-link btPagina" data-pagina='{{pagina}}'>{{pagina}}</a>
 						{{/if}}
 					</li>
 				{{/each}}
@@ -64,7 +64,7 @@
 					{{#if siguienteDesactivado}}
 						<span class="page-link">Siguiente</span>
 					{{else}}
-						<a href="" class="page-link">Siguiente</a>
+						<a href="" class="page-link btPagina" data-pagina='siguiente'>Siguiente</a>
 					{{/if}}
 				</li>
 			</ul>			

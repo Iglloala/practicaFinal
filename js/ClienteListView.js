@@ -4,7 +4,7 @@ var ClienteListView = (function(){
 	// propiedades para paginar
 	var _paginas = [1];
 	var _paginaActual = 1;
-	var _maximoPagina = 5;
+	var _maximoPagina = 5; // 5
 	var _posicionInicio = (_paginaActual * _maximoPagina) - _maximoPagina; // 0 // 5 // 10
 	var _posicionFinal = (_paginaActual * _maximoPagina); // 5 // 10 // 15
 	var _arrayClientes = [];
@@ -34,6 +34,33 @@ var ClienteListView = (function(){
 		PubSub.publish('btPulsado/eliminar', idCliente);
 	});
 
+	// btPagina
+	$('#contenido').on('click', '.btPagina', function(event){
+		event.preventDefault();
+		// Pillo el atributo data-pagina del botón
+		var paginaSolicitada = $(this).attr('data-pagina');
+		// Comprueba si es anterior o siguiente
+		if (isNaN(paginaSolicitada)){
+			switch (paginaSolicitada) {
+				case 'anterior':
+					paginaSolicitada = Number(_paginaActual) -1;
+					break;
+				case 'siguiente':
+					paginaSolicitada = Number(_paginaActual) +1;
+					break;
+				default:
+					paginaSolicitada = 1;
+					break;
+			}
+		}
+		// Actualiza los valores del paginador
+		_paginaActual = paginaSolicitada;
+		_posicionInicio = (_paginaActual * _maximoPagina) - _maximoPagina;
+		_posicionFinal = (_paginaActual * _maximoPagina);
+		// Y llama a la función que genera la vista con los nuevos valores
+		_generar(_arrayClientes);
+	});
+
 	// MÉTODOS
 	function _init(){
 		// Se registran los suscriptores para la actualización de la vista
@@ -53,7 +80,7 @@ var ClienteListView = (function(){
 		// - Calculo los números de página
 		_paginas = (function(arrayClientes){
 			var arrayPaginas = [];
-			for (var c=0, p=1; c<arrayClientes.length; c+=5, p++){
+			for (var c=0, p=1; c<arrayClientes.length; c+=_maximoPagina, p++){
 				var actual = (p==_paginaActual)?true:false;
 				var pagina = {pagina:p, actual:actual};
 				arrayPaginas.push(pagina)
@@ -82,6 +109,8 @@ var ClienteListView = (function(){
 		else {
 			_bloqueContenido.find('#clienteListView').replaceWith(html);
 		}
+		// Deshabilita el comportamiento normal de los botones btPagina
+		//$('#contenido #btPagina').preventDefault();
 	}
 
 	// EJECUCIÓN

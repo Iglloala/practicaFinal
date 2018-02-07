@@ -92,7 +92,7 @@ var ClienteList = (function(){
 			// por el nuevo listado que devuelve nuevo.php
 			_actualizarListado(respuesta);
 			//Publico la inserción
-			PubSub.publish("cliente/insertado", {clientes:_listaClientes});
+			PubSub.publish("cliente/insertado", _listaClientes);
 		})
 		jqxhr.fail(function(){
 			console.log('No se ha podido insertar el cliente en la bbdd');
@@ -118,7 +118,7 @@ var ClienteList = (function(){
 				}
 				_listaClientes.splice(indice, 1);
 				//Publico la eliminación
-				PubSub.publish("cliente/eliminado", {clientes:_listaClientes});
+				PubSub.publish("cliente/eliminado", _listaClientes);
 			}
 			// Si no, pues notifica de error
 			else {
@@ -163,7 +163,7 @@ var ClienteList = (function(){
 				console.log("El cliente ha sido actualizado correctamente");
 				_actualizarListado(respuesta);
 				// Y publico la modificación
-				PubSub.publish("cliente/modificado", {clientes:_listaClientes});
+				PubSub.publish("cliente/modificado", _listaClientes);
 			}
 		});
 		// Si falla la peticion

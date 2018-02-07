@@ -70,7 +70,7 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
 },"5":function(container,depth0,helpers,partials,data) {
     return "						<span class=\"page-link\">Anterior</span>\r\n";
 },"7":function(container,depth0,helpers,partials,data) {
-    return "						<a href=\"\" class=\"page-link\">Anterior</a>\r\n";
+    return "						<a href=\"\" class=\"page-link btPagina\" data-pagina='anterior'>Anterior</a>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -88,15 +88,17 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
     + container.escapeExpression(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"pagina","hash":{},"data":data}) : helper)))
     + "</span>\r\n";
 },"14":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "							<a href=\"\" class=\"page-link\">"
-    + container.escapeExpression(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"pagina","hash":{},"data":data}) : helper)))
+  return "							<a href=\"\" class=\"page-link btPagina\" data-pagina='"
+    + alias4(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pagina","hash":{},"data":data}) : helper)))
+    + "'>"
+    + alias4(((helper = (helper = helpers.pagina || (depth0 != null ? depth0.pagina : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pagina","hash":{},"data":data}) : helper)))
     + "</a>\r\n";
 },"16":function(container,depth0,helpers,partials,data) {
     return "						<span class=\"page-link\">Siguiente</span>\r\n";
 },"18":function(container,depth0,helpers,partials,data) {
-    return "						<a href=\"\" class=\"page-link\">Siguiente</a>\r\n";
+    return "						<a href=\"\" class=\"page-link btPagina\" data-pagina='siguiente'>Siguiente</a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
