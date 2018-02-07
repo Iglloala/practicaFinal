@@ -50,6 +50,5 @@ var CrudClientes = (function(){
 	
 	// RETORNO
 	return {
-		conf: _conf,
 	};
 })();

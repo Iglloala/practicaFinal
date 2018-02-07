@@ -12,7 +12,7 @@ var ClienteListView = (function(){
 	});
 
 	// btModificarCliente
-	$('#contenido').on('click', '#btModificarCliente', function(event){
+	$('#contenido').on('click', '.btModificarCliente', function(event){
 		// Pillo el id del cliente que se pretende modificar
 		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
 		// Y publico que se ha pulsado el botón (pasando el id del cliente)
@@ -20,7 +20,7 @@ var ClienteListView = (function(){
 	});
 
 	// btEliminarCliente
-	$('#contenido').on('click', '#btEliminarCliente', function(event){
+	$('#contenido').on('click', '.btEliminarCliente', function(event){
 		// Pillo el id del cliente que se pretende eliminar
 		var idCliente = $(event.currentTarget).parent().parent().attr('data-id');
 		// Publico que se ha pulsado el botón (pasando el id del cliente)
@@ -56,6 +56,5 @@ var ClienteListView = (function(){
 	
 	// RETORNO
 	return {
-		generar: _generar,
 	}
 })();
