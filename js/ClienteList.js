@@ -153,7 +153,6 @@ var ClienteList = (function(){
 		jqxhr.done(function(respuesta){
 			// Aquí hay que comprobar si la respuesta es un listado de clientes json
 			// o si por el contrario es un json con un array asociativo con indice 'error' WTF!?
-			console.log(respuesta);
 			// Si ha devuelto error informo
 			if (respuesta.indexOf('error') != -1){
 				console.log('Error al actualizar el cliente' );
@@ -174,11 +173,6 @@ var ClienteList = (function(){
 
 	// RETORNO
 	return {
-		listaClientes: _listaClientes,
 		init: _init,
-		insertarCliente: _insertarCliente,
-		buscarCliente: _buscarCliente, // igual sobra
-		eliminarCliente: _eliminarCliente,
-		modificarCliente: _modificarCliente
 	}
 })();
