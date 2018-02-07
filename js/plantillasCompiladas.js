@@ -46,7 +46,7 @@ templates['listaClientes'] = template({"1":function(container,depth0,helpers,par
     + alias4(((helper = (helper = helpers.telefono || (depth0 != null ? depth0.telefono : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"telefono","hash":{},"data":data}) : helper)))
     + "</td>\r\n						<td>"
     + ((stack1 = (helpers.transformarFecha || (depth0 && depth0.transformarFecha) || alias2).call(alias1,(depth0 != null ? depth0.fecha_nacimiento : depth0),{"name":"transformarFecha","hash":{},"data":data})) != null ? stack1 : "")
-    + "</td>\r\n						<td>\r\n							<button id='btModificarCliente'>\r\n								<i class='fas fa-edit'></i>\r\n							</button>\r\n							<button id='btEliminarCliente'>\r\n								<i class='fas fa-trash-alt'></i>\r\n							</button>\r\n						</td>\r\n					</tr>\r\n";
+    + "</td>\r\n						<td>\r\n							<button class='btModificarCliente'>\r\n								<i class='fas fa-edit'></i>\r\n							</button>\r\n							<button class='btEliminarCliente'>\r\n								<i class='fas fa-trash-alt'></i>\r\n							</button>\r\n						</td>\r\n					</tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

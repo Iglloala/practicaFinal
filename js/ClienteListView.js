@@ -56,6 +56,5 @@ var ClienteListView = (function(){
 	
 	// RETORNO
 	return {
-		generar: _generar,
 	}
 })();

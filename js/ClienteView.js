@@ -88,9 +88,5 @@ var ClienteView = (function(){
 
 	// RETORNO
 	return {
-		generar: _generar,
-		mostrar: _mostrar,
-		ocultar: _ocultar,
-		obtenerDatos: _obtenerDatos,
 	}
 })();

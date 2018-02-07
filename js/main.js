@@ -47,9 +47,7 @@ var CrudClientes = (function(){
 		ClienteList.init(_conf.urlApi);	
 	}
 	
-	
 	// RETORNO
 	return {
-		conf: _conf,
-	};
+	}
 })();
